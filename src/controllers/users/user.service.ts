@@ -9,7 +9,7 @@ export class UserService {
   
   getUsers(): any {
     const users = this.databaseService.get('users');
-    return  users
+    return  this.deepClone(users)
   }
 
   isUUID(str: string): boolean {
@@ -22,8 +22,9 @@ export class UserService {
         let users = this.databaseService.get('users');
         
         user.updatedAt = Date.now();
-        
-        users = users.map((usr: User) => usr.id === user.id ? user : usr)
+        user.version = user.version + 1;
+
+        users = users.map((usr: User) => usr.id === user.id ? { ...usr, ...user } : usr)
         this.databaseService.set('users', users);
         return true;
     } catch (error) {
@@ -47,10 +48,15 @@ export class UserService {
     }
   }
 
+  deepClone(data) {
+    return data ? JSON.parse(JSON.stringify(data)) : null;
+  }
+
   getUser(id: string): any {
     const users = this.databaseService.get('users') || [];
     const user = users.find(u => u.id === id);
-    return  { data: user }
+
+    return  this.deepClone(user)
   }
 
   createUser(UserData): any {
@@ -70,7 +76,10 @@ export class UserService {
         createdAt: Date.now(),
         updatedAt: Date.now()
     }
+    console.log('userData: ', userData);
+    
     this.databaseService.insert('users', userData);
-    return { success: false, data: userData };
+    
+    return this.deepClone({ success: false, data: userData });
   }
 }

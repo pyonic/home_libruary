@@ -30,7 +30,16 @@ export class UserController {
 
   @Get()
   getUsers(): any {
-    return this.userService.getUsers();
+    const users = this.userService.getUsers();
+    console.log(users);
+
+    const usersList = users.map(user => {
+      const userL = { ...user }
+      delete userL.password;
+      return userL;
+    })
+
+    return usersList;
   }
 
   @Get('/:id')
@@ -41,11 +50,13 @@ export class UserController {
     
     const user = this.userService.getUser(id);
     
-    if (!user.data) {
+    if (!user) {
         throw new NotFoundException(`User with id ${id} is not found!`)
     }
 
-    return this.userService.getUser(id);
+    delete user.password;
+    
+    return user;
   }
 
   @Post()
@@ -57,6 +68,7 @@ export class UserController {
         throw new BadRequestException(user.error)
     }
     
+    delete user.data.password;
     return user.data;
   }
 
@@ -64,26 +76,28 @@ export class UserController {
   @HttpCode(HttpStatus.OK)
   @UsePipes(new ValidationPipe({ transform: false }))
   updateUser(@Param('id') id: string, @Body() updatePasswordDto: UpdatePasswordDto) {
+    console.log(id, this.userService.getUser(id), updatePasswordDto);
+    
     if (!this.userService.isUUID(id)) {
         throw new BadRequestException(`${id} is not UUID!`)
     }
 
-    const dataUser = this.userService.getUser(id);
+    const user = this.userService.getUser(id);
     
-    if (!dataUser.data) {
+    if (!user) {
         throw new NotFoundException(`User with id ${id} is not found!`)
     }
 
-    const user = dataUser.data;
-    console.log(user.password);
-    
     if (user.password !== updatePasswordDto.oldPassword) {
         throw new ForbiddenException(`Password ${updatePasswordDto.oldPassword} does not matches with old one!`)
     }
 
     user.password = updatePasswordDto.newPassword
+    this.userService.updateUser(user)
 
-    return this.userService.updateUser(user) && user;
+    delete user.password;
+
+    return user;
 
   }
 
@@ -94,14 +108,11 @@ export class UserController {
         throw new BadRequestException(`${id} is not UUID!`)
     }
 
-    const dataUser = this.userService.getUser(id);
+    const user = this.userService.getUser(id);
     
-    if (!dataUser.data) {
+    if (!user) {
         throw new NotFoundException(`User with id ${id} is not found!`)
     }
-
-    const user = dataUser.data;
-    console.log(user.password);
 
     return this.userService.delete(user);
   }

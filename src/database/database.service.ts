@@ -28,4 +28,9 @@ export class DatabaseService {
         const matching: object = data.find(dt => dt[key] === value);
         return matching;
     }
+
+    isUUID(str: string): boolean {
+        const pattern = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+        return pattern.test(str);
+    }
 }

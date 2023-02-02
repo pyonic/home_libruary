@@ -3,7 +3,7 @@ import { DatabaseService } from './database/database.service';
 import { UserService } from './controllers/users/user.service';
 import { TracksController } from './controllers/tracks/tracks.controller';
 import { UserController } from './controllers/users/user.controller';
-import { UserExistenceMiddleware } from './middlwares/all.middlwares';
+import { ExistenceMiddleware } from './middlwares/all.middlwares';
 
 @Module({
   imports: [],
@@ -13,7 +13,7 @@ import { UserExistenceMiddleware } from './middlwares/all.middlwares';
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(UserExistenceMiddleware)
+      .apply(ExistenceMiddleware)
       .forRoutes({
         path: '/user/:id',
         method: RequestMethod.PUT,

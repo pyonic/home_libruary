@@ -44,7 +44,7 @@ export class TracksController {
     @Put('/:id')
     @HttpCode(HttpStatus.OK)
     @UsePipes(new ValidationPipe({ transform: false }))
-    updateTrack(@Body() updateTrackDto, @Param('id') id: string) {
+    updateTrack(@Body() updateTrackDto: CreateTrackDto, @Param('id') id: string) {
         if (!this.orm.isUUID(id)) {
             throw new BadRequestException(`${id} is not UUID!`);
         }
@@ -54,6 +54,7 @@ export class TracksController {
         }
         
         const { name, artistId, albumId, duration } = updateTrackDto;
+
         const updateData: any = {}
 
         if (name) updateData.name = name;
