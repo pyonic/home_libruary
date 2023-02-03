@@ -16,12 +16,14 @@ import {
     Injectable,
     NestMiddleware
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
 
 import { CreateUserDto, UpdatePasswordDto } from 'src/dto/users.dto';
 import { User } from 'src/models/user.interface';
 import { UserService } from './user.service';
 
+@ApiTags('User')
 @Controller('/user')
 export class UserController {
   constructor(

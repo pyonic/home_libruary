@@ -6,6 +6,7 @@ import { UserController } from './controllers/users/user.controller';
 import { ExistenceMiddleware } from './middlwares/all.middlwares';
 import { ArtistsController } from './controllers/artists/artists.controller';
 import { AlbumsController } from './controllers/albums/albums.controller';
+import { FavoritesController } from './controllers/favorites/favs.controller';
 
 @Module({
   imports: [],
@@ -13,7 +14,8 @@ import { AlbumsController } from './controllers/albums/albums.controller';
     UserController,
     TracksController,
     ArtistsController,
-    AlbumsController
+    AlbumsController,
+    FavoritesController
   ],
   providers: [UserService, DatabaseService],
 })

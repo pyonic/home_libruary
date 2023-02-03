@@ -1,0 +1,808 @@
+{
+    "openapi": "3.0.0",
+    "paths": {
+      "/user": {
+        "get": {
+          "operationId": "UserController_getUsers",
+          "parameters": [
+            
+          ],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "User"
+          ]
+        },
+        "post": {
+          "operationId": "UserController_insertUser",
+          "parameters": [
+            
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUserDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "User"
+          ]
+        }
+      },
+      "/user/{id}": {
+        "get": {
+          "operationId": "UserController_getUser",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "User"
+          ]
+        },
+        "put": {
+          "operationId": "UserController_updateUser",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatePasswordDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "User"
+          ]
+        },
+        "delete": {
+          "operationId": "UserController_deleteUser",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "User"
+          ]
+        }
+      },
+      "/track": {
+        "get": {
+          "operationId": "TracksController_getTracks",
+          "parameters": [
+            
+          ],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Tracks"
+          ]
+        },
+        "post": {
+          "operationId": "TracksController_createTrack",
+          "parameters": [
+            
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateTrackDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Tracks"
+          ]
+        }
+      },
+      "/track/{id}": {
+        "get": {
+          "operationId": "TracksController_getTrack",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Tracks"
+          ]
+        },
+        "put": {
+          "operationId": "TracksController_updateTrack",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateTrackDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Tracks"
+          ]
+        },
+        "delete": {
+          "operationId": "TracksController_deleteTrack",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Tracks"
+          ]
+        }
+      },
+      "/artist": {
+        "get": {
+          "operationId": "ArtistsController_getArtists",
+          "parameters": [
+            
+          ],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Artists"
+          ]
+        },
+        "post": {
+          "operationId": "ArtistsController_createTrack",
+          "parameters": [
+            
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateArtistDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Artists"
+          ]
+        }
+      },
+      "/artist/{id}": {
+        "get": {
+          "operationId": "ArtistsController_getArtist",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Artists"
+          ]
+        },
+        "put": {
+          "operationId": "ArtistsController_updateTrack",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateArtistDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Artists"
+          ]
+        },
+        "delete": {
+          "operationId": "ArtistsController_deleteTrack",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Artists"
+          ]
+        }
+      },
+      "/album": {
+        "get": {
+          "operationId": "AlbumsController_getAlbums",
+          "parameters": [
+            
+          ],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "albums"
+          ]
+        },
+        "post": {
+          "operationId": "AlbumsController_createTrack",
+          "parameters": [
+            
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAlbumDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "albums"
+          ]
+        }
+      },
+      "/album/{id}": {
+        "get": {
+          "operationId": "AlbumsController_getArtist",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "albums"
+          ]
+        },
+        "put": {
+          "operationId": "AlbumsController_updateTrack",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAlbumDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "albums"
+          ]
+        },
+        "delete": {
+          "operationId": "AlbumsController_deleteTrack",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "albums"
+          ]
+        }
+      },
+      "/favs": {
+        "get": {
+          "operationId": "FavoritesController_getFavorites",
+          "parameters": [
+            
+          ],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Favorites"
+          ]
+        },
+        "post": {
+          "operationId": "FavoritesController_createFavorite",
+          "parameters": [
+            
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateFavoriteDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Favorites"
+          ]
+        }
+      },
+      "/favs/track/{id}": {
+        "post": {
+          "operationId": "FavoritesController_addTrack",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Favorites"
+          ]
+        },
+        "delete": {
+          "operationId": "FavoritesController_deleteTrack",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Favorites"
+          ]
+        }
+      },
+      "/favs/album/{id}": {
+        "post": {
+          "operationId": "FavoritesController_addAlbum",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Favorites"
+          ]
+        },
+        "delete": {
+          "operationId": "FavoritesController_deleteAlbum",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Favorites"
+          ]
+        }
+      },
+      "/favs/artist/{id}": {
+        "post": {
+          "operationId": "FavoritesController_addArtist",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Favorites"
+          ]
+        },
+        "delete": {
+          "operationId": "FavoritesController_deleteArtist",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Favorites"
+          ]
+        }
+      },
+      "/favs/{id}": {
+        "get": {
+          "operationId": "FavoritesController_getFavorite",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Favorites"
+          ]
+        }
+      }
+    },
+    "info": {
+      "title": "Home Library Service",
+      "description": "Assignment: REST Service",
+      "version": "1.0",
+      "contact": {
+        
+      }
+    },
+    "tags": [
+      {
+        "name": "Favorites",
+        "description": ""
+      },
+      {
+        "name": "Albums",
+        "description": ""
+      },
+      {
+        "name": "Tracks",
+        "description": ""
+      },
+      {
+        "name": "User",
+        "description": ""
+      },
+      {
+        "name": "Artists",
+        "description": ""
+      }
+    ],
+    "servers": [
+      
+    ],
+    "components": {
+      "schemas": {
+        "CreateUserDto": {
+          "type": "object",
+          "properties": {
+            "login": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "login",
+            "password"
+          ]
+        },
+        "UpdatePasswordDto": {
+          "type": "object",
+          "properties": {
+            "oldPassword": {
+              "type": "string"
+            },
+            "newPassword": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "oldPassword",
+            "newPassword"
+          ]
+        },
+        "CreateTrackDto": {
+          "type": "object",
+          "properties": {
+            "artistId": {
+              "type": "string"
+            },
+            "albumId": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "artistId",
+            "albumId",
+            "name"
+          ]
+        },
+        "CreateArtistDto": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "grammy": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "name",
+            "grammy"
+          ]
+        },
+        "CreateAlbumDto": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "year": {
+              "type": "number"
+            },
+            "artistId": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "year",
+            "artistId"
+          ]
+        },
+        "CreateFavoriteDto": {
+          "type": "object",
+          "properties": {
+            "artists": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "albums": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "tracks": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "artists",
+            "albums",
+            "tracks"
+          ]
+        }
+      }
+    }
+  }

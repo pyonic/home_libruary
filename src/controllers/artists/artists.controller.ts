@@ -1,10 +1,12 @@
 import { BadRequestException, Body, Controller, Delete, Get, HttpCode, HttpStatus, NotFoundException, Param, Post, Put, UsePipes, ValidationPipe } from "@nestjs/common";
+import { ApiTags } from "@nestjs/swagger";
 import { DatabaseService } from "src/database/database.service";
 import { CustomOrm } from "src/database/zorm.service";
 import { CreateArtistDto } from "src/dto/artists.dto";
 import { CreateTrackDto } from "src/dto/tracks.dto";
 import { Track } from "src/models/track.interface";
 
+@ApiTags('Artists')
 @Controller('/artist')
 export class ArtistsController {
     orm: CustomOrm;

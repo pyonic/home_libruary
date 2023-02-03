@@ -1,9 +1,10 @@
 import { BadRequestException, Body, NestMiddleware, Controller, Delete, Get, HttpCode, HttpStatus, NotFoundException, Param, Post, Put, UsePipes, ValidationPipe, Injectable } from "@nestjs/common";
+import { ApiTags } from "@nestjs/swagger";
 import { DatabaseService } from "src/database/database.service";
 import { CustomOrm } from "src/database/zorm.service";
 import { CreateTrackDto } from "src/dto/tracks.dto";
-import { Track } from "src/models/track.interface";
 
+@ApiTags('Tracks')
 @Controller('/track')
 export class TracksController {
     orm: CustomOrm;
