@@ -15,17 +15,15 @@ import { FavoritesController } from './controllers/favorites/favs.controller';
     TracksController,
     ArtistsController,
     AlbumsController,
-    FavoritesController
+    FavoritesController,
   ],
   providers: [UserService, DatabaseService],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(ExistenceMiddleware)
-      .forRoutes({
-        path: '/user/:id',
-        method: RequestMethod.PUT,
-      });
+    consumer.apply(ExistenceMiddleware).forRoutes({
+      path: '/user/:id',
+      method: RequestMethod.PUT,
+    });
   }
 }

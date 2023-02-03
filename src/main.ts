@@ -3,7 +3,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import * as dotenv from 'dotenv';
 
-dotenv.config()
+dotenv.config();
 
 const PORT = process.env.PORT || 4000;
 
