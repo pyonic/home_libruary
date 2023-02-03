@@ -29,6 +29,9 @@ For more information about OpenAPI/Swagger please visit https://swagger.io/.
 
 ## Testing
 
+> **Warning**
+> Application should run separate from tests
+
 After application running open new terminal and enter:
 
 To run all tests without authorization
