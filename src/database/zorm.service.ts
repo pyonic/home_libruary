@@ -16,6 +16,11 @@ export class CustomOrm {
         return data;
     }
 
+    setData(data) {
+        this.databaseService.set(this.table, data);
+        return true;
+    }
+
     insertOne(data): object {
         const uuid: string = randomUUID();
         data.id = uuid;
@@ -35,7 +40,14 @@ export class CustomOrm {
         tableData = tableData.filter(data => data.id !== id).map(data => data);
         this.databaseService.set(this.table, tableData);
         return true;
-    } 
+    }
+
+    deleteMany(filter: object) {
+        let tableData = this.databaseService.getDatabase()[this.table] || [];
+        tableData = tableData.filter(filter).map(data => data);
+        this.databaseService.set(this.table, tableData);
+        return true;
+    }
 
     isUUID(str: string): boolean {
         const pattern: RegExp = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
