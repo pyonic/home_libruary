@@ -8,7 +8,7 @@
 ## Downloading
 
 ```
-git clone {repository URL}
+git clone --branch=develop https://github.com/pyonic/nodejs2022Q4-service.git
 ```
 
 ## Installing NPM modules
@@ -28,6 +28,9 @@ in your browser OpenAPI documentation by typing http://localhost:4000/doc/.
 For more information about OpenAPI/Swagger please visit https://swagger.io/.
 
 ## Testing
+
+> **Warning**
+> Application should run separate from tests
 
 After application running open new terminal and enter:
 
