@@ -1,6 +1,5 @@
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { DatabaseService } from './database/database.service';
-import { UserService } from './controllers/users/user.service';
 import { TracksController } from './controllers/tracks/tracks.controller';
 import { UserController } from './controllers/users/user.controller';
 import { ExistenceMiddleware } from './middlwares/all.middlwares';
@@ -17,7 +16,7 @@ import { FavoritesController } from './controllers/favorites/favs.controller';
     AlbumsController,
     FavoritesController,
   ],
-  providers: [UserService, DatabaseService],
+  providers: [DatabaseService],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {

@@ -15,20 +15,23 @@ import {
   Delete,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { DatabaseService } from 'src/database/database.service';
+import { CustomOrm } from 'src/database/zorm.service';
 
 import { CreateUserDto, UpdatePasswordDto } from 'src/dto/users.dto';
 import { User } from 'src/models/user.interface';
-import { UserService } from './user.service';
 
 @ApiTags('User')
 @Controller('/user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  orm: CustomOrm;
+  constructor(private readonly databaseService: DatabaseService) {
+    this.orm = new CustomOrm(this.databaseService, 'users');
+  }
 
   @Get()
   getUsers(): any {
-    const users = this.userService.getUsers();
-    console.log(users);
+    const users: any = this.orm.getAll();
 
     const usersList = users.map((user) => {
       const userL = { ...user };
@@ -41,11 +44,11 @@ export class UserController {
 
   @Get('/:id')
   getUser(@Param('id') id: string): User {
-    if (!this.userService.isUUID(id)) {
+    if (!this.orm.isUUID(id)) {
       throw new BadRequestException(`${id} is not UUID!`);
     }
 
-    const user = this.userService.getUser(id);
+    const user: any = this.orm.getById(id);
 
     if (!user) {
       throw new NotFoundException(`User with id ${id} is not found!`);
@@ -60,7 +63,7 @@ export class UserController {
   @HttpCode(HttpStatus.CREATED)
   @UsePipes(new ValidationPipe({ transform: false }))
   insertUser(@Body() createUserDto: CreateUserDto): Promise<User> {
-    const user = this.userService.createUser(createUserDto);
+    const user = this.orm.createUser(createUserDto);
     if (!user.success && user.error) {
       throw new BadRequestException(user.error);
     }
@@ -76,13 +79,11 @@ export class UserController {
     @Param('id') id: string,
     @Body() updatePasswordDto: UpdatePasswordDto,
   ) {
-    console.log(id, this.userService.getUser(id), updatePasswordDto);
-
-    if (!this.userService.isUUID(id)) {
+    if (!this.orm.isUUID(id)) {
       throw new BadRequestException(`${id} is not UUID!`);
     }
 
-    const user = this.userService.getUser(id);
+    const user: any = this.orm.getById(id);
 
     if (!user) {
       throw new NotFoundException(`User with id ${id} is not found!`);
@@ -95,7 +96,7 @@ export class UserController {
     }
 
     user.password = updatePasswordDto.newPassword;
-    this.userService.updateUser(user);
+    this.orm.updateUser(user);
 
     delete user.password;
 
@@ -105,16 +106,18 @@ export class UserController {
   @Delete('/:id')
   @HttpCode(HttpStatus.NO_CONTENT)
   deleteUser(@Param('id') id: string) {
-    if (!this.userService.isUUID(id)) {
+    if (!this.orm.isUUID(id)) {
       throw new BadRequestException(`${id} is not UUID!`);
     }
 
-    const user = this.userService.getUser(id);
+    const user = this.orm.getById(id);
 
     if (!user) {
       throw new NotFoundException(`User with id ${id} is not found!`);
     }
 
-    return this.userService.delete(user);
+    this.orm.deleteOne(id);
+
+    return { message: 'User deleted with success' };
   }
 }
