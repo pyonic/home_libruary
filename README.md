@@ -14,7 +14,7 @@ git clone --branch=develop https://github.com/pyonic/nodejs2022Q4-service.git
 ## Installing NPM modules
 
 ```
-npm install
+npm i --legacy-peer-deps
 ```
 
 ## Running application
