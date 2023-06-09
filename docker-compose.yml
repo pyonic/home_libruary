@@ -1,0 +1,30 @@
+version: '3.0'
+services:
+  # app:
+  #   build:
+  #     context: .
+  #   ports:
+  #     - "${PORT}:${PORT}"
+  #   env_file:
+  #     - .env
+  #   networks:
+  #     - home_lib_netw
+  #   depends_on:
+  #     - postgres
+  postgres:
+    build: db/
+    env_file:
+      - .env
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - home_lib_netw
+
+volumes:
+  db_data:
+
+networks:
+  home_lib_netw:
+    driver: bridge

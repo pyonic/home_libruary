@@ -1,0 +1,11 @@
+file.txt
+secret.key
+
+docs/
+tests/
+
+*.log
+*.tmp
+
+**/temp/
+node_modules/
