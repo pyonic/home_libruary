@@ -10,6 +10,8 @@
     "auto:restart": "nodemon --watch src --ext ts --exec 'npm run build && node dist/main.js'",
     "auto:rebuild:linux": "nodemon --watch src --ext ts --exec 'sudo docker compose up -d --build --no-deps'",
     "auto:rebuild:windows": "nodemon --watch src --ext ts --exec 'docker-compose up -d --build --no-deps'",
+    "docker:scan:linux": "sudo docker scan thepyonic/home_lib_api && sudo docker scan thepyonic/home_lib_db",
+    "docker:scan:windows": "docker scan thepyonic/home_lib_api && docker scan thepyonic/home_lib_db",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
