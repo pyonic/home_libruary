@@ -1,75 +1,27 @@
-# Home Library Service
+# Home library part 2
 
-## Prerequisites
+## Run docker containers
+On Linux
 
-- Git - [Download & Install Git](https://git-scm.com/downloads).
-- Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager.
+```sudo docker compose up -d```
 
-## Downloading
+On Windows
 
-```
-git clone --branch=develop https://github.com/pyonic/nodejs2022Q4-service.git
-```
+```docker-compose up -d```
 
-## Installing NPM modules
+## Auto rebuild containers
 
-```
-npm i --legacy-peer-deps
-```
+On Linux
 
-## Running application
+```npm run auto:rebuild:linux```
 
-```
-npm start
-```
+On Windows
 
-After starting the app on port (4000 as default) you can open
-in your browser OpenAPI documentation by typing http://localhost:4000/doc/.
-For more information about OpenAPI/Swagger please visit https://swagger.io/.
+```npm run auto:rebuild:windows```
 
-## Testing
+Container size is less then 500mb
 
-> **Warning**
-> Application should run separate from tests
+![Api image size](image.png)
 
-After application running open new terminal and enter:
+![Postgres image size](image-1.png)
 
-To run all tests without authorization
-
-```
-npm run test
-```
-
-To run only one of all test suites
-
-```
-npm run test -- <path to suite>
-```
-
-To run all test with authorization
-
-```
-npm run test:auth
-```
-
-To run only specific test suite with authorization
-
-```
-npm run test:auth -- <path to suite>
-```
-
-### Auto-fix and format
-
-```
-npm run lint
-```
-
-```
-npm run format
-```
-
-### Debugging in VSCode
-
-Press <kbd>F5</kbd> to debug.
-
-For more information, visit: https://code.visualstudio.com/docs/editor/debugging

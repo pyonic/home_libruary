@@ -1,13 +1,16 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Module } from "@nestjs/common";
+import { ArtistsController } from "./artists.controller";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { Tracks } from "../tracks/tracks.repository";
+import { Artists } from "./artist.repository";
+import { ArtistsService } from "./artist.service";
 
-@Entity()
-export class Artist {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
-    
-    @Column()
-    name: string;
+@Module({
+    imports: [TypeOrmModule.forFeature([Artists, Tracks])],
+    controllers: [ArtistsController],
+    providers: [ArtistsService],
+    exports: [ArtistsService]
+})
+export class ArtistsModule {
 
-    @Column()
-    grammy: boolean;
 }

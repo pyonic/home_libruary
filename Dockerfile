@@ -1,13 +1,11 @@
-FROM node:18-alpine
+FROM node:alpine
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
-
 COPY . .
 
-RUN npm run build
+RUN npm i --production --legacy-peer-deps && npm run build
 
 CMD [ "node", "dist/main.js" ]

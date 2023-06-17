@@ -6,6 +6,7 @@ tests/
 
 *.log
 *.tmp
-
+*.lock
+.git
 **/temp/
 node_modules/

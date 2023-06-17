@@ -2,44 +2,40 @@ import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { DatabaseService } from './database/database.service';
-import { TracksController } from './controllers/tracks/tracks.controller';
-import { UserController } from './controllers/users/user.controller';
-import { ExistenceMiddleware } from './middlwares/all.middlwares';
-import { ArtistsController } from './controllers/artists/artists.controller';
-import { AlbumsController } from './controllers/albums/albums.controller';
-import { FavoritesController } from './controllers/favorites/favs.controller';
-
 import * as dotenv from 'dotenv';
+import { UserModule } from './modules/users/users.module';
+import { ArtistsModule } from './modules/artists/artists.module';
+import { AlbumsModule } from './modules/albums/albums.module';
+import { FavoritesModule } from './modules/favorites/favorites.module';
+import { TracksModule } from './modules/tracks/tracks.module';
+import { Users } from './modules/users/users.repository';
+import { Favorites } from './modules/favorites/favorites.repository';
+import { Albums } from './modules/albums/albums.repository';
+import { Tracks } from './modules/tracks/tracks.repository';
+import { Artists } from './modules/artists/artist.repository';
 
 dotenv.config();
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 3306,
+      host: process.env.POSTGRES_HOST,
+      port: Number(process.env.POSTGRES_PORT),
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      entities: [],
-      synchronize: true,
+      entities: [Users, Artists, Favorites, Albums, Tracks],
+      synchronize: false,
     }),
+    UserModule,
+    ArtistsModule,
+    AlbumsModule,
+    FavoritesModule,
+    TracksModule
   ],
-  controllers: [
-    UserController,
-    TracksController,
-    ArtistsController,
-    AlbumsController,
-    FavoritesController,
-  ],
-  providers: [DatabaseService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(ExistenceMiddleware).forRoutes({
-      path: '/user/:id',
-      method: RequestMethod.PUT,
-    });
-  }
+  configure() {}
 }

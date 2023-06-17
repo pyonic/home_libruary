@@ -1,29 +1,38 @@
 version: '3.0'
 services:
-  # app:
-  #   build:
-  #     context: .
-  #   ports:
-  #     - "${PORT}:${PORT}"
-  #   env_file:
-  #     - .env
-  #   networks:
-  #     - home_lib_netw
-  #   depends_on:
-  #     - postgres
   postgres:
     build: db/
     env_file:
       - .env
     ports:
       - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    image: thepyonic/home_lib_db
     volumes:
       - db_data:/var/lib/postgresql/data
     networks:
       - home_lib_netw
 
+  app:
+    build:
+      context: .
+    ports:
+      - "${PORT}:${PORT}"
+    restart: always
+    image: thepyonic/home_lib_api
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    environment:
+      - POSTGRES_HOST=postgres
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - home_lib_netw
+
 volumes:
   db_data:
+  app_logs:
 
 networks:
   home_lib_netw:

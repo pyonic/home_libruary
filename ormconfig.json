@@ -1,0 +1,16 @@
+{
+    "type": "postgres",
+    "host": "localhost",
+    "port": "${env:POSTGRES_PORT}",
+    "username": "${env:POSTGRES_USER}",
+    "password": "${env:POSTGRES_PASSWORD}",
+    "database": "${env:POSTGRES_DB}",
+    "synchronize": false,
+    "logging": true,
+    "entities": ["dist/**/*.repository{.ts,.js}"],
+    "migrations": ["dist/database/migrations/*{.ts,.js}"],
+    "cli": {
+      "migrationsDir": "src/migrations"
+    }
+  }
+  
