@@ -1,4 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  ManyToMany,
+} from 'typeorm';
 import { Tracks } from '../tracks/tracks.repository';
 import { Favorites } from '../favorites/favorites.repository';
 import { Albums } from '../albums/albums.repository';
@@ -14,12 +20,12 @@ export class Artists {
   @Column()
   grammy: boolean;
 
-  @OneToMany(() => Albums, album => album.artist)
+  @OneToMany(() => Albums, (album) => album.artist)
   albums: Albums[];
 
-  @OneToMany(() => Tracks, track => track.artist)
+  @OneToMany(() => Tracks, (track) => track.artist)
   tracks: Tracks[];
 
-  @ManyToMany(() => Favorites, favorite => favorite.favoriteArtists)
+  @ManyToMany(() => Favorites, (favorite) => favorite.favoriteArtists)
   favoriteBy: Favorites[];
 }

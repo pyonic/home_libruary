@@ -1,4 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 import { Artists } from '../artists/artist.repository';
 import { Albums } from '../albums/albums.repository';
 import { Tracks } from '../tracks/tracks.repository';

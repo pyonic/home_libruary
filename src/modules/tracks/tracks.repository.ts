@@ -1,4 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 import { Artists } from '../artists/artist.repository';
 import { Albums } from '../albums/albums.repository';
 
@@ -10,19 +16,19 @@ export class Tracks {
   @Column()
   name: string;
 
-  @ManyToOne(() => Artists, artist => artist.tracks)
-  @JoinColumn({ name: "artistId" })
+  @ManyToOne(() => Artists, (artist) => artist.tracks)
+  @JoinColumn({ name: 'artistId' })
   artist: Artists;
 
-  @ManyToOne(() => Albums, album => album.tracks)
-  @JoinColumn({ name: "albumId" })
+  @ManyToOne(() => Albums, (album) => album.tracks)
+  @JoinColumn({ name: 'albumId' })
   album: Albums;
 
   @Column()
-  artistId: string
+  artistId: string;
 
   @Column()
-  albumId: string
+  albumId: string;
 
   @Column()
   duration: number;

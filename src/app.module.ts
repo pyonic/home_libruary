@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -31,11 +31,9 @@ dotenv.config();
     ArtistsModule,
     AlbumsModule,
     FavoritesModule,
-    TracksModule
+    TracksModule,
   ],
   controllers: [],
   providers: [],
 })
-export class AppModule {
-  configure() {}
-}
+export class AppModule {}

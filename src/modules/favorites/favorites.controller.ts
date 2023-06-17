@@ -1,12 +1,10 @@
 import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
   Get,
   HttpCode,
   HttpStatus,
-  NotFoundException,
   Param,
   Post,
   UsePipes,
@@ -29,9 +27,11 @@ export class FavoritesController {
 
   @Get()
   async getFavorites() {
-    const favs = await this.favoritesService.getAll() || [TEMPLATE_FAV];
+    const favs = (await this.favoritesService.getAll()) || [TEMPLATE_FAV];
 
-    return await this.favoritesService.parseFav(favs.length > 0 ? favs[0] : TEMPLATE_FAV);
+    return await this.favoritesService.parseFav(
+      favs.length > 0 ? favs[0] : TEMPLATE_FAV,
+    );
   }
 
   // Tracks
@@ -84,9 +84,9 @@ export class FavoritesController {
   async createFavorite(@Body() createFavoriteDto: CreateFavoriteDto) {
     const { artists, albums, tracks } = createFavoriteDto;
     const insertData = { artists, albums, tracks };
-    
-    console.log("CRETE: ", createFavoriteDto);
-    
+
+    console.log('CRETE: ', createFavoriteDto);
+
     return await this.favoritesService.createFavorite(insertData);
   }
 }

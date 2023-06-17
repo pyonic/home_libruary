@@ -9,6 +9,7 @@ services:
       - "${POSTGRES_PORT}:${POSTGRES_PORT}"
     image: thepyonic/home_lib_db
     volumes:
+      - db_logs:/logs:z
       - db_data:/var/lib/postgresql/data
     networks:
       - home_lib_netw
@@ -22,18 +23,19 @@ services:
     image: thepyonic/home_lib_api
     env_file:
       - .env
-    depends_on:
-      - postgres
     environment:
       - POSTGRES_HOST=postgres
     volumes:
       - ./logs:/app/logs
     networks:
       - home_lib_netw
+    depends_on:
+      - postgres
 
 volumes:
   db_data:
   app_logs:
+  db_logs:
 
 networks:
   home_lib_netw:

@@ -1,22 +1,20 @@
 import {
-    BadRequestException,
-    Body,
-    Controller,
-    Delete,
-    Get,
-    HttpCode,
-    HttpStatus,
-    NotFoundException,
-    Param,
-    Post,
-    Put,
-    UsePipes,
-    ValidationPipe,
-  } from '@nestjs/common';
-  import { ApiTags } from '@nestjs/swagger';
-  import { CreateArtistDto } from 'src/dto/artists.dto';
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+  Put,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
+import { CreateArtistDto } from 'src/dto/artists.dto';
 import { ArtistsService } from './artist.service';
-  
+
 @ApiTags('Artists')
 @Controller('/artist')
 export class ArtistsController {
@@ -57,4 +55,3 @@ export class ArtistsController {
     return await this.artistsService.deleteArtist(id);
   }
 }
-  

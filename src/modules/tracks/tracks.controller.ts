@@ -1,12 +1,10 @@
 import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
   Get,
   HttpCode,
   HttpStatus,
-  NotFoundException,
   Param,
   Post,
   Put,
@@ -24,7 +22,6 @@ export class TracksController {
 
   @Get()
   async getTracks() {
-    // TEst
     return await this.tracksService.getAll();
   }
 
@@ -45,7 +42,10 @@ export class TracksController {
   @Put('/:id')
   @HttpCode(HttpStatus.OK)
   @UsePipes(new ValidationPipe({ transform: false }))
-  async updateTrack(@Body() updateTrackDto: CreateTrackDto, @Param('id') id: string) {
+  async updateTrack(
+    @Body() updateTrackDto: CreateTrackDto,
+    @Param('id') id: string,
+  ) {
     return await this.tracksService.updateTrack(id, updateTrackDto);
   }
 
