@@ -2,6 +2,7 @@ version: '3.0'
 services:
   postgres:
     build: db/
+    restart: on-failure
     env_file:
       - .env
     ports:
@@ -17,7 +18,7 @@ services:
       context: .
     ports:
       - "${PORT}:${PORT}"
-    restart: always
+    restart: on-failure
     image: thepyonic/home_lib_api
     env_file:
       - .env
