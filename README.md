@@ -12,7 +12,7 @@
 See more in instructions below
 
 ## Extra commands
-- Scan vulnerability of images: ``docker:scan:linux`` for Linux and ``docker:scan:windows`` for Windows, but before that you need to login into docker ``docker login``
+- Scan vulnerability of images: ``docker:scan:linux`` for Linux and ``docker:scan:windows`` for Windows, but before that **you need to login into** docker ``docker login``
 - Containers live rebuild after **/src** changes -> See **Auto rebuild containers** section below
   
 ## Run docker containers
