@@ -189,8 +189,6 @@ export class CustomLoggerService implements LoggerService {
   }
 
   async catchUnhandledRejections() {
-    await this.log('unhandledRejection exception handled');
-
     process.on('unhandledRejection', async (reason: any) => {
       await this.error(`Unhandled rejection detected: ${reason.message}`);
       if (+process.env.KILL_ON_UNHANDLED === 1) {
@@ -200,8 +198,6 @@ export class CustomLoggerService implements LoggerService {
   }
 
   async catchUncaughtExceptions() {
-    await this.log('uncaughtException exception handled');
-
     process.on('uncaughtException', async (error: Error) => {
       await this.error(
         `Unhandled error detected: ${error.stack || error.message}`,

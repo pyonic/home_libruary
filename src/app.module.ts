@@ -65,8 +65,8 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(AuthMiddleware)
-      .exclude('/', 'auth/refresh', '/doc')
-      .forRoutes('user', 'track', 'artist', 'favs', 'albums');
+      .exclude('/', '/doc')
+      .forRoutes('user', 'track', 'artist', 'favs', 'albums', 'auth/refresh');
 
     consumer.apply(LoggerMiddleware).forRoutes('*');
   }
