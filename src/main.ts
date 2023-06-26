@@ -17,6 +17,7 @@ async function bootstrap() {
   loggerService.catchUnhandledRejections();
 
   // To check below handlers
+
   // setTimeout(() => {
   //   throw new Error('Oops!');
   // }, 5000);
@@ -36,7 +37,7 @@ async function bootstrap() {
     .addTag('Artists')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('docs', app, document);
+  SwaggerModule.setup('doc', app, document);
 
   await app.listen(PORT);
 }

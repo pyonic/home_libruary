@@ -43,11 +43,11 @@ export class UsersService {
     if (!data.version) {
       data.version = 1;
     }
-    
+
     data.password = await hash(data.password, salt);
 
     // Out old tests are not allowing to check user uniqueness, so skipping commented it here
-    
+
     // const userExist = await this.usersRepository.findOne({ where: { login: data.login }});
 
     // if (userExist) {
@@ -67,7 +67,7 @@ export class UsersService {
     const user: any = await this.usersRepository.findOne({
       where: { id },
     });
-    
+
     if (!user) {
       throw new NotFoundException(`User with id ${id} is not found!`);
     }

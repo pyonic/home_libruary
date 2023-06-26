@@ -32,7 +32,14 @@ dotenv.config();
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      entities: [Users, Artists, Favorites, Albums, Tracks, RefreshTokensRepository],
+      entities: [
+        Users,
+        Artists,
+        Favorites,
+        Albums,
+        Tracks,
+        RefreshTokensRepository,
+      ],
       synchronize: false,
     }),
     UserModule,
@@ -42,7 +49,7 @@ dotenv.config();
     TracksModule,
     AuthModule,
     TypeOrmModule.forFeature([Users]),
-    TypeOrmModule.forFeature([RefreshTokensRepository])
+    TypeOrmModule.forFeature([RefreshTokensRepository]),
   ],
   controllers: [],
   providers: [
@@ -50,19 +57,17 @@ dotenv.config();
     AuthService,
     {
       provide: APP_FILTER,
-      useClass: ExceptionsFilter
-    }
+      useClass: ExceptionsFilter,
+    },
   ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(AuthMiddleware)
-      .exclude("/", "auth/refresh", "/doc")
-      .forRoutes("user", "track", "artist", "favs", "albums")
+      .exclude('/', 'auth/refresh', '/doc')
+      .forRoutes('user', 'track', 'artist', 'favs', 'albums');
 
-    consumer
-      .apply(LoggerMiddleware)
-      .forRoutes("*")
+    consumer.apply(LoggerMiddleware).forRoutes('*');
   }
 }
