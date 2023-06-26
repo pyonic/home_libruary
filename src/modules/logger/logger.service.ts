@@ -138,10 +138,8 @@ export class CustomLoggerService implements LoggerService {
 
   async createFolder(path) {
     try {
-      await fs.access(path);
-    } catch {
       await fs.mkdir(path);
-    }
+    } catch {}
   }
 
   async saveLog(data, meta = { error: false }) {
