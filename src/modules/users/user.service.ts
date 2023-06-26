@@ -44,6 +44,8 @@ export class UsersService {
       data.version = 1;
     }
 
+    console.log(')> ', data.password, salt);
+
     data.password = await hash(data.password, salt);
 
     // Out old tests are not allowing to check user uniqueness, so skipping commented it here

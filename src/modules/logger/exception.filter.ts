@@ -24,9 +24,11 @@ export class ExceptionsFilter implements ExceptionFilter {
       details: exception.message,
     });
 
+    const error: any = exception.getResponse();
+
     response.status(status).json({
       timestamp: Date.now(),
-      message: exception.message,
+      message: error.message,
     });
   }
 }

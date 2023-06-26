@@ -59,9 +59,7 @@ export class AuthService {
 
     const payload = { id: user.id, login: user.login };
 
-    const { accessToken, refreshToken: refreshToken } = await this.getTokens(
-      payload,
-    );
+    const { accessToken, refreshToken } = await this.getTokens(payload);
 
     return { accessToken, refreshToken };
   }
