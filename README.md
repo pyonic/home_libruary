@@ -1,72 +1,46 @@
-# Home Library Service
+# Home library part 2
 
-## Prerequisites
+## Steps to run app:
+- Clone repo ```git clone https://github.com/pyonic/home_libruary.git --branch=home_lib_p2```
+- Install dependencies ```npm i --legacy-peer-deps```
+- Build the app ```npm run build```
+- First, rename .env.example to .env
+- Run docker containers (instruction can be found below)
+- Run migrations ``npm run migrations:run``
+- Check tests: ```npm run test:auth```
 
-- Git - [Download & Install Git](https://git-scm.com/downloads).
-- Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager.
+See more in instructions below
 
-## Downloading
+## Extra commands
+- Scan vulnerability of images: ``docker:scan:linux`` for Linux and ``docker:scan:windows`` for Windows, but before that **you need to login into** docker ``docker login``
+- Containers live rebuild after **/src** changes -> See **Auto rebuild containers** section below
+  
+## Run docker containers
+On Linux
 
-```
-git clone {repository URL}
-```
+```sudo docker compose up -d```
 
-## Installing NPM modules
+On Windows
 
-```
-npm install
-```
+```docker-compose up -d```
 
-## Running application
+## Run migrations
 
-```
-npm start
-```
+``npm run migrations:run``
 
-After starting the app on port (4000 as default) you can open
-in your browser OpenAPI documentation by typing http://localhost:4000/doc/.
-For more information about OpenAPI/Swagger please visit https://swagger.io/.
+## Auto rebuild containers
 
-## Testing
+On Linux
 
-After application running open new terminal and enter:
+```npm run auto:rebuild:linux```
 
-To run all tests without authorization
+On Windows
 
-```
-npm run test
-```
+```npm run auto:rebuild:windows```
 
-To run only one of all test suites
+Container size is less then 500mb
 
-```
-npm run test -- <path to suite>
-```
+![Api image size](image.png)
 
-To run all test with authorization
+![Postgres image size](image-1.png)
 
-```
-npm run test:auth
-```
-
-To run only specific test suite with authorization
-
-```
-npm run test:auth -- <path to suite>
-```
-
-### Auto-fix and format
-
-```
-npm run lint
-```
-
-```
-npm run format
-```
-
-### Debugging in VSCode
-
-Press <kbd>F5</kbd> to debug.
-
-For more information, visit: https://code.visualstudio.com/docs/editor/debugging
