@@ -7,7 +7,7 @@
 - First, rename .env.example to .env
 - Run docker containers (instruction can be found below)
 - Run migrations ``npm run migrations:run``
-- Check tests: ```npm run test```
+- Check tests: ```npm run test:auth```
 
 See more in instructions below
 

@@ -85,8 +85,6 @@ export class FavoritesController {
     const { artists, albums, tracks } = createFavoriteDto;
     const insertData = { artists, albums, tracks };
 
-    console.log('CRETE: ', createFavoriteDto);
-
     return await this.favoritesService.createFavorite(insertData);
   }
 }

@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -13,6 +13,14 @@ import { Favorites } from './modules/favorites/favorites.repository';
 import { Albums } from './modules/albums/albums.repository';
 import { Tracks } from './modules/tracks/tracks.repository';
 import { Artists } from './modules/artists/artist.repository';
+import { AuthModule } from './modules/auth/auth.module';
+import { RefreshTokensRepository } from './modules/auth/auth.repository';
+import { AuthMiddleware } from './modules/auth/auth.middlware';
+import { AuthService } from './modules/auth/auth.service';
+import { APP_FILTER } from '@nestjs/core';
+import { LoggerMiddleware } from './modules/logger/logger.middleware';
+import { ExceptionsFilter } from './modules/logger/exception.filter';
+import { CustomLoggerService } from './modules/logger/logger.service';
 
 dotenv.config();
 @Module({
@@ -24,7 +32,14 @@ dotenv.config();
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      entities: [Users, Artists, Favorites, Albums, Tracks],
+      entities: [
+        Users,
+        Artists,
+        Favorites,
+        Albums,
+        Tracks,
+        RefreshTokensRepository,
+      ],
       synchronize: false,
     }),
     UserModule,
@@ -32,8 +47,27 @@ dotenv.config();
     AlbumsModule,
     FavoritesModule,
     TracksModule,
+    AuthModule,
+    TypeOrmModule.forFeature([Users]),
+    TypeOrmModule.forFeature([RefreshTokensRepository]),
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    CustomLoggerService,
+    AuthService,
+    {
+      provide: APP_FILTER,
+      useClass: ExceptionsFilter,
+    },
+  ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(AuthMiddleware)
+      .exclude('/', '/doc')
+      .forRoutes('user', 'track', 'artist', 'favs', 'albums', 'auth/refresh');
+
+    consumer.apply(LoggerMiddleware).forRoutes('*');
+  }
+}

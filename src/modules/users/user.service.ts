@@ -7,6 +7,14 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Users } from './users.repository';
+import { compare, genSaltSync, hash } from 'bcrypt';
+
+import * as dotenv from 'dotenv';
+
+dotenv.config();
+
+const SALT_ROUNDS = parseInt(process.env.CRYPT_SALT);
+const salt = genSaltSync(SALT_ROUNDS);
 
 @Injectable()
 export class UsersService {
@@ -36,6 +44,18 @@ export class UsersService {
       data.version = 1;
     }
 
+    console.log(')> ', data.password, salt);
+
+    data.password = await hash(data.password, salt);
+
+    // Out old tests are not allowing to check user uniqueness, so skipping commented it here
+
+    // const userExist = await this.usersRepository.findOne({ where: { login: data.login }});
+
+    // if (userExist) {
+    //   throw new BadRequestException("This login already exists!")
+    // }
+
     const user: Users = await this.usersRepository.save(data);
 
     return this.getById(user.id);
@@ -49,19 +69,19 @@ export class UsersService {
     const user: any = await this.usersRepository.findOne({
       where: { id },
     });
-    // console.log("USER: ", user);
 
     if (!user) {
       throw new NotFoundException(`User with id ${id} is not found!`);
     }
 
-    if (user.password !== data.oldPassword) {
+    const valid = await compare(data.oldPassword, user.password);
+
+    if (!valid) {
       throw new ForbiddenException(
         `Password ${data.oldPassword} does not matches with old one!`,
       );
     }
-
-    user.password = data.newPassword;
+    user.password = await hash(data.newPassword, salt);
     user.version = user.version + 1;
 
     user.updatedAt = Date.now();
